@@ -42,6 +42,7 @@ class ConnectFour:
                 return r
     
     def draw_board(self, current_player):
+        print(self.board)
         for c in range(COLUMN_COUNT):
             for r in range(ROW_COUNT):
                 pygame.draw.rect(self.screen, DARK_BLUE, (c * SQUARE_SIZE, r * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
