@@ -2,7 +2,7 @@ import pygame
 import sys
 import os
 import random
-import Engine
+import engine
 
 ROW_COUNT = 6
 COLUMN_COUNT = 7
@@ -17,6 +17,9 @@ DARK_BLUE = (0, 46, 177)
 
 
 class ConnectFour:
+    def ai_move(self):
+        return engine.agent(self.board, 3, 2)
+
     def __init__(self):
         self.board = [[0] * COLUMN_COUNT for _ in range(ROW_COUNT)]
         pygame.init()
@@ -47,7 +50,6 @@ class ConnectFour:
                 return r
 
     def draw_board(self, current_player):
-        print(self.board)
         for c in range(COLUMN_COUNT):
             for r in range(ROW_COUNT):
                 pygame.draw.rect(
@@ -55,7 +57,7 @@ class ConnectFour:
                     DARK_BLUE,
                     (c * SQUARE_SIZE, r * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE),
                 )
-                color = WHITE
+                color = BLACK
                 if self.board[r][c] == 1:
                     color = RED
                 elif self.board[r][c] == 2:
@@ -135,11 +137,8 @@ class ConnectFour:
 
         return False
 
-    def ai_move(self):
-        return Engine.agent(self.board, 4)
-
     def display_menu(self):
-        font = pygame.font.SysFont("monospace", 30, True)
+        font = pygame.font.SysFont("monospace", 30, bold=True)
         title = "Welcome To Our Connect 4 Game"
         title_text = font.render(title, True, BLACK)
         player_vs_player_text = font.render("Player vs. Player", True, BLACK)

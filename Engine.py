@@ -45,9 +45,14 @@ def is_valid_location(state, col):
     return grid[0][col] == 0
 
 
-def get_score(state, col, piece, depth):
+def get_score(state, col, piece, depth, option):
     next_state = drop_piece(state, col, piece)
-    return minimax(next_state, depth - 1, piece, False)
+    if option == 1:
+        return minimax(next_state, depth - 1, piece, False)
+    else:
+        return minimax_alpha_beta(
+            next_state, depth - 1, -math.inf, math.inf, piece, False
+        )
 
 
 # heuristic function
@@ -75,9 +80,8 @@ def minimax_heuristic(state, player):
         (10**10) * num_of_four
         + 1000 * num_of_three
         + 100 * num_of_two
-        - 100 * num_of_two_opp
-        - (10**5) * num_of_three_opp
-        - (10**6) * num_of_four_opp
+        - 1 * num_of_two_opp
+        - (10**6) * num_of_three_opp
     )
 
 
@@ -144,7 +148,7 @@ def is_terminal(state):
                 return True
 
     # Check negative slope diagonal
-    
+
     for c in range(COLUMN_COUNT - 3):
         for r in range(3, ROW_COUNT):
             if (
@@ -175,11 +179,44 @@ def minimax(state, depth, piece, maximizingPlayer):
         return value
 
 
-def agent(grid, depth):
+def minimax_alpha_beta(state, depth, alpha, beta, piece, maximizingPlayer):
+    if depth == 0 or is_terminal(state):
+        return minimax_heuristic(state, piece)
+
+    valid_location = get_valid_locations(state)
+
+    if maximizingPlayer:
+        value = -math.inf
+        for col in valid_location:
+            child = drop_piece(state, col, piece)
+            value = max(
+                value, minimax_alpha_beta(child, depth - 1, alpha, beta, piece, False)
+            )
+            alpha = max(alpha, value)
+            if beta <= alpha:
+                break
+        return value
+    else:
+        value = math.inf
+        for col in valid_location:
+            child = drop_piece(state, col, piece % 2 + 1)
+            value = min(
+                value, minimax_alpha_beta(child, depth - 1, alpha, beta, piece, True)
+            )
+            beta = min(beta, value)
+            if beta <= alpha:
+                break
+        return value
+
+
+def agent(grid, depth, option):
     state = convert_from_grid_to_string(grid)
     valid_moves = get_valid_locations(state)
     scores = dict(
-        zip(valid_moves, [get_score(state, col, 2, depth) for col in valid_moves])
+        zip(
+            valid_moves,
+            [get_score(state, col, 2, depth, option) for col in valid_moves],
+        )
     )
     max_cols = [key for key in scores.keys() if scores[key] == max(scores.values())]
     return random.choice(max_cols)
@@ -188,15 +225,15 @@ def agent(grid, depth):
 board = [
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 1, 2, 2, 0],
     [0, 0, 0, 2, 1, 1, 0],
-    [0, 1, 2, 1, 2, 2, 2],
+    [0, 2, 2, 1, 2, 2, 2],
 ]
 
 
 def main():
-    print(agent(board, 3))
+    print(agent(board, 5))
 
 
 if __name__ == "__main__":
