@@ -2,7 +2,7 @@ import pygame
 import sys
 import os
 import random  
-
+import Engine
 ROW_COUNT = 6
 COLUMN_COUNT = 7
 SQUARE_SIZE = 100
@@ -93,8 +93,7 @@ class ConnectFour:
         return False
     
     def ai_move(self):
-        valid_moves = [col for col in range(COLUMN_COUNT) if self.is_valid_location(col)]
-        return random.choice(valid_moves)
+        return Engine.agent(self.board,4)
     
     def display_menu(self):
         font = pygame.font.SysFont("monospace", 30,True)
