@@ -2,7 +2,7 @@ import pygame
 import sys
 import os
 import random  
-
+import Engine
 ROW_COUNT = 6
 COLUMN_COUNT = 7
 SQUARE_SIZE = 100
@@ -93,8 +93,7 @@ class ConnectFour:
         return False
     
     def ai_move(self):
-        valid_moves = [col for col in range(COLUMN_COUNT) if self.is_valid_location(col)]
-        return random.choice(valid_moves)
+        return Engine.agent(self.board,4)
     def ai_menu(self):
         ai_menu = True
         selected_ai_engine = "Random"  # Default AI engine
@@ -166,7 +165,6 @@ class ConnectFour:
             frame_counter = max(0, frame_counter - 1)
 
         return selected_ai_engine, ai_difficulty
-
 
 
     
