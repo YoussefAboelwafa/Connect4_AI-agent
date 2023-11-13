@@ -18,7 +18,7 @@ DARK_BLUE = (0, 46, 177)
 
 class ConnectFour:
     def ai_move(self):
-        return engine.agent(self.board, 4, 2)
+        return engine.agent(self.board, 1, 2)
 
     def __init__(self):
         self.board = [[0] * COLUMN_COUNT for _ in range(ROW_COUNT)]

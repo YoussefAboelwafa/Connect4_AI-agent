@@ -81,7 +81,7 @@ def minimax_alpha_beta(board, depth, alpha, beta, maximizingPlayer):
 
 ## Analysis for Runtime
 - The following analysis is done on some random states
-- The time is measured in (ms)
+- The time is measured in seconds
 
 ### Without Pruning:
 <table align="center">
@@ -93,28 +93,28 @@ def minimax_alpha_beta(board, depth, alpha, beta, maximizingPlayer):
   </tr>
   <tr>
     <td>1</td>
-    <td></td>
-    <td></td>
+    <td>7</td>
+    <td>0.009</td>
   </tr>
   <tr>
     <td>2</td>
-    <td></td>
-    <td></td>
+    <td>57</td>
+    <td>0.043</td>
   </tr>
   <tr>
     <td>3</td>
-    <td></td>
-    <td></td>
+    <td>400</td>
+    <td>0.25</td>
   </tr>
   <tr>
     <td>4</td>
-    <td></td>
-    <td></td>
+    <td>2775</td>
+    <td>1.53</td>
   </tr>
   <tr>
     <td>5</td>
-    <td></td>
-    <td></td>
+    <td>19608</td>
+    <td>6.63</td>
   </tr>
 </table>
 
@@ -128,27 +128,27 @@ def minimax_alpha_beta(board, depth, alpha, beta, maximizingPlayer):
   </tr>
   <tr>
     <td>1</td>
-    <td></td>
-    <td></td>
+    <td>7</td>
+    <td>0.009</td>
   </tr>
   <tr>
     <td>2</td>
-    <td></td>
-    <td></td>
+    <td>27</td>
+    <td>0.039</td>
   </tr>
   <tr>
     <td>3</td>
-    <td></td>
-    <td></td>
+    <td>84</td>
+    <td>0.185</td>
   </tr>
   <tr>
     <td>4</td>
-    <td></td>
-    <td></td>
+    <td>235</td>
+    <td>0.65</td>
   </tr>
   <tr>
     <td>5</td>
-    <td></td>
-    <td></td>
+    <td>1111</td>
+    <td>2.8</td>
   </tr>
 </table>

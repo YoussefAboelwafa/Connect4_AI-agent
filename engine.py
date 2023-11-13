@@ -1,6 +1,7 @@
 import math
 from GUI import *
 import random
+import time
 
 
 ROW_COUNT = 6
@@ -239,14 +240,17 @@ board = [
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 1, 2, 0, 2, 0],
-    [0, 2, 2, 1, 0, 2, 1],
+    [0, 1, 0, 1, 0, 0, 0],
+    [1, 2, 1, 2, 0, 2, 2],
+    [1, 2, 2, 1, 1, 2, 1],
 ]
 
 
 def main():
-    print(agent(board, 2, 1))
+    start = time.time()
+    print(agent(board, 5, 2))
+    end = time.time()
+    print(end - start)
 
 
 if __name__ == "__main__":
