@@ -3,5 +3,5 @@
 /Scripts/*
 pyvenv.cfg
 tempCodeRunnerFile.py
-/__pychache__/*
-*pyc
+/__pycache__/*
+*.pyc
