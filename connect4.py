@@ -42,7 +42,6 @@ class ConnectFour:
                 return r
     
     def draw_board(self, current_player):
-        print(self.board)
         for c in range(COLUMN_COUNT):
             for r in range(ROW_COUNT):
                 pygame.draw.rect(self.screen, DARK_BLUE, (c * SQUARE_SIZE, r * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
@@ -96,19 +95,149 @@ class ConnectFour:
     def ai_move(self):
         valid_moves = [col for col in range(COLUMN_COUNT) if self.is_valid_location(col)]
         return random.choice(valid_moves)
+    def ai_menu(self):
+        ai_menu = True
+        selected_ai_engine = "Random"  # Default AI engine
+        ai_difficulty = 1  # Default difficulty level
+        difficulty_change_delay = 3 
+        frame_counter = 0
+        while ai_menu:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if 200 <= event.pos[0] <= 400 and 150 <= event.pos[1] <= 200:
+                        selected_ai_engine = "Random"
+                        ai_menu = False
+                    elif 200 <= event.pos[0] <= 400 and 250 <= event.pos[1] <= 300:
+                        selected_ai_engine = "Minimax"  # Adjust for your actual AI engine
+                        ai_menu = False
+
+            self.screen.fill(BLACK)
+            self.screen.blit(self.animation_frames[self.frame_index], (0, 0))
+            self.clock.tick(10)
+            self.frame_index = (self.frame_index + 1) % len(self.animation_frames)
+
+            font = pygame.font.SysFont("monospace", 30, True)
+
+            title_text = font.render("Choose AI Engine:", True, WHITE)
+            title_text_3d_left = font.render("Choose AI Engine:", True, BLACK)
+            title_text_3d_right = font.render("Choose AI Engine:", True, BLACK)
+            title_text_3d_left_pos = (80 - 2, 100 + 2)
+            title_text_3d_right_pos = (80 + 2, 100 - 2)
+            self.screen.blit(title_text_3d_left, title_text_3d_left_pos)
+            self.screen.blit(title_text_3d_right, title_text_3d_right_pos)
+
+            option_text = font.render("Random", True, WHITE)
+            option_text_3d_left = font.render("Random", True, BLACK)
+            option_text_3d_right = font.render("Random", True, BLACK)
+            option_text_3d_left_pos = (200 - 2, 150 + 2)
+            option_text_3d_right_pos = (200 + 2, 150 - 2)
+            self.screen.blit(option_text_3d_left, option_text_3d_left_pos)
+            self.screen.blit(option_text_3d_right, option_text_3d_right_pos)
+
+            option_text = font.render("Minimax", True, WHITE)  # Adjust for your actual AI engine
+            option_text_3d_left = font.render("Minimax", True, BLACK)
+            option_text_3d_right = font.render("Minimax", True, BLACK)
+            option_text_3d_left_pos = (200 - 2, 250 + 2)
+            option_text_3d_right_pos = (200 + 2, 250 - 2)
+            self.screen.blit(option_text_3d_left, option_text_3d_left_pos)
+            self.screen.blit(option_text_3d_right, option_text_3d_right_pos)
+
+            difficulty_text = font.render(f"Difficulty: {ai_difficulty}", True, WHITE)
+            difficulty_text_3d_left = font.render(f"Difficulty: {ai_difficulty}", True, DARK_BLUE)
+            difficulty_text_3d_right = font.render(f"Difficulty: {ai_difficulty}", True, DARK_BLUE)
+            difficulty_text_3d_left_pos = (80 - 2, 350 + 2)
+            difficulty_text_3d_right_pos = (80 + 2, 350 - 2)
+            self.screen.blit(difficulty_text_3d_left, difficulty_text_3d_left_pos)
+            self.screen.blit(difficulty_text_3d_right, difficulty_text_3d_right_pos)
+
+            pygame.display.update()
+
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_UP] and frame_counter == 0:
+                ai_difficulty += 1
+                frame_counter = difficulty_change_delay
+            elif keys[pygame.K_DOWN] and ai_difficulty > 1 and frame_counter == 0:
+                ai_difficulty -= 1
+                frame_counter = difficulty_change_delay
+
+            frame_counter = max(0, frame_counter - 1)
+
+        return selected_ai_engine, ai_difficulty
+
+
+
     
     def display_menu(self):
-        font = pygame.font.SysFont("monospace", 30,True)
+        font = pygame.font.SysFont("monospace", 30, True)
+    
         title = "Welcome To Our Connect 4 Game"
         title_text = font.render(title, True, BLACK)
+        
+        # Create two additional versions of the title text with slight offsets for a 3D effect
+        title_text_3d_left = font.render(title, True, BLACK)
+        title_text_3d_right = font.render(title, True, BLACK)
+        
+        # Adjust the position of the 3D versions
+        title_text_3d_left_pos = (80 - 2, 150 + 2)
+        title_text_3d_right_pos = (80 + 2, 150 - 2)
+        # Draw a white rectangle behind the menu options
+        # menu_rect = pygame.Rect(60, 120, 580, 300)
+        # pygame.draw.rect(self.screen, WHITE, menu_rect)
+        # pygame.draw.rect(self.screen, BLACK, menu_rect, 5)
+
+        menu_rect = pygame.Surface((600, 400), pygame.SRCALPHA)
+        pygame.draw.rect(menu_rect, (255, 255, 255, 128), (0, 0, 550, 300), border_radius=10)
+        # pygame.draw.rect(menu_rect, BLACK, (0, 0, 400, 150), 5)
+        self.screen.blit(menu_rect, (75, 120))
+
+
         player_vs_player_text = font.render("Player vs. Player", True, BLACK)
         player_vs_ai_text = font.render("Player vs. AI", True, BLACK)
         quit_text = font.render("Quit", True, BLACK)
+        
+        # Render 3D versions of the menu options
+        player_vs_player_text_3d_left = font.render("Player vs. Player", True, BLACK)
+        player_vs_player_text_3d_right = font.render("Player vs. Player", True, BLACK)
+        
+        player_vs_ai_text_3d_left = font.render("Player vs. AI", True, BLACK)
+        player_vs_ai_text_3d_right = font.render("Player vs. AI", True, BLACK)
+        
+        quit_text_3d_left = font.render("Quit", True, BLACK)
+        quit_text_3d_right = font.render("Quit", True, BLACK)
+        
+        # Adjust the positions of the 3D versions for each menu option
+        player_vs_player_text_3d_left_pos = (200 - 2, 250 + 2)
+        player_vs_player_text_3d_right_pos = (200 + 2, 250 - 2)
+        
+        player_vs_ai_text_3d_left_pos = (230 - 2, 300 + 2)
+        player_vs_ai_text_3d_right_pos = (230 + 2, 300 - 2)
+        
+        quit_text_3d_left_pos = (315 - 2, 350 + 2)
+        quit_text_3d_right_pos = (315 + 2, 350 - 2)
+        
+        # # Blit the rendered text to the screen
+        self.screen.blit(title_text_3d_left, title_text_3d_left_pos)
+        # self.screen.blit(title_text_3d_right, title_text_3d_right_pos)
+        
+        self.screen.blit(player_vs_player_text_3d_left, player_vs_player_text_3d_left_pos)
+        # self.screen.blit(player_vs_player_text_3d_right, player_vs_player_text_3d_right_pos)
+        
+        self.screen.blit(player_vs_ai_text_3d_left, player_vs_ai_text_3d_left_pos)
+        # self.screen.blit(player_vs_ai_text_3d_right, player_vs_ai_text_3d_right_pos)
+        
+        self.screen.blit(quit_text_3d_left, quit_text_3d_left_pos)
+        # self.screen.blit(quit_text_3d_right, quit_text_3d_right_pos)
+        
         self.screen.blit(player_vs_player_text, (200, 250))
         self.screen.blit(player_vs_ai_text, (230, 300))
         self.screen.blit(title_text, (80, 150))
         self.screen.blit(quit_text, (315, 350))
+        
         pygame.display.update()
+
 
     def main_menu(self):
         while self.menu:
@@ -123,6 +252,9 @@ class ConnectFour:
                     elif event.pos[1] > 300 and event.pos[1] < 350:
                         self.player_vs_player = False
                         self.menu = False
+                        if not self.player_vs_player:
+                            selected_ai_engine = self.ai_menu()
+                            print(selected_ai_engine)
                     elif event.pos[1]>350 and event.pos[1] <400:
                         pygame.quit()
                         sys.exit()

@@ -4,3 +4,4 @@
 pyvenv.cfg
 tempCodeRunnerFile.py
 /__pychache__/*
+*pyc

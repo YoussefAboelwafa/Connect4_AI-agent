@@ -6,6 +6,14 @@ def minmax_heuristic(board, player):
     num_of_four_opp = count_window(board,4,player%2+1)
     num_of_three_opp= count_window(board,3,player%2+1)
     num_of_two_opp= count_window(board,2,player%2+1)
+    print(
+        "num_of_four: ", num_of_four,
+        "num_of_three: ", num_of_three,
+        "num_of_two: ", num_of_two,
+        "num_of_four_opp: ", num_of_four_opp,
+        "num_of_three_opp: ", num_of_three_opp,
+        "num_of_two_opp: ", num_of_two_opp
+    )
 
     if num_of_four == 0 and num_of_three == 0 and num_of_two == 0 and num_of_four_opp == 0 and num_of_three_opp == 0 and num_of_three == 0 and num_of_two_opp == 0:
         return 0
@@ -39,11 +47,11 @@ def count_window(board,window,player):
 
 board=[ [0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0],
-        [0, 1, 0, 0, 0, 1, 0],
-        [1, 0, 1, 2, 0, 0, 0],
-        [1, 0, 0, 1, 2, 2, 0],
-        [1, 1, 1, 0, 1, 2, 0]]
+        [0, 0, 0, 0, 1, 1, 0],
+        [0, 0, 0, 1, 2, 2, 0],
+        [0, 0, 0, 2, 1, 1, 0],
+        [0, 1, 2, 1, 2, 2, 2]]
 def main():
-    print(minmax_heuristic(board,1))
+    print(minmax_heuristic(board,2))
 if __name__ == "__main__":
     main()
