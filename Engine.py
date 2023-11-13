@@ -55,9 +55,20 @@ def get_score(state, col, piece, depth, option):
         )
 
 
+def count_potential_future_wins(board, player):
+    potential_wins = 0
+    for col in range(COLUMN_COUNT):
+        if is_valid_location(convert_from_grid_to_string(board), col):
+            future_state = drop_piece(convert_from_grid_to_string(board), col, player)
+            if is_terminal(future_state):
+                potential_wins += 1
+    return potential_wins
+
+
 # heuristic function
 def minimax_heuristic(state, player):
     board = convert_from_string_to_grid(state)
+
     num_of_four = count_window(board, 4, player)
     num_of_three = count_window(board, 3, player)
     num_of_two = count_window(board, 2, player)
@@ -82,6 +93,7 @@ def minimax_heuristic(state, player):
         + 100 * num_of_two
         - 1 * num_of_two_opp
         - (10**6) * num_of_three_opp
+        + 1000 * count_potential_future_wins(board, player)
     )
 
 
@@ -219,6 +231,7 @@ def agent(grid, depth, option):
         )
     )
     max_cols = [key for key in scores.keys() if scores[key] == max(scores.values())]
+    print(max_cols)
     return random.choice(max_cols)
 
 
@@ -226,14 +239,14 @@ board = [
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 1, 2, 2, 0],
-    [0, 0, 0, 2, 1, 1, 0],
-    [0, 2, 2, 1, 2, 2, 2],
+    [0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 0, 2, 0, 2, 0],
+    [0, 2, 2, 1, 0, 2, 0],
 ]
 
 
 def main():
-    print(agent(board, 5))
+    print(agent(board, 2, 1))
 
 
 if __name__ == "__main__":
