@@ -80,7 +80,7 @@ def minimax_alpha_beta(board, depth, alpha, beta, maximizingPlayer):
 ```
 
 ## Analysis for Runtime
-- The following analysis is done on some random states
+- The following analysis is done on a random state
 - The time is measured in seconds
 
 ### Without Pruning:
