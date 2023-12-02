@@ -16,9 +16,6 @@ GREEN = (0,255,0)
 DARK_BLUE=(0,46,177)
 LIGHT_GRAY=(200,200,200)
 GRAY = (128, 128, 128)
-tree_mm = {'000000000000000000000010100012120221221121': {'depth': 2, 'piece': 1, 'value': 9999009994, 'childs': 
-[{'000000000000000000000210100012120221221121': {'depth': 1, 'piece': 2, 'value': -1997209, 'childs': 
-[{'000000000000001000000210100012120221221121': {'depth': 0, 'piece': 1, 'value': -1991207, 'childs': []}}, {'000000000000000100000210100012120221221121': {'depth': 0, 'piece': 1, 'value': -1991207, 'childs': []}}, {'000000000000000000000211100012120221221121': {'depth': 0, 'piece': 1, 'value': -1997209, 'childs': []}}, {'000000000000000001000210100012120221221121': {'depth': 0, 'piece': 1, 'value': -1997209, 'childs': []}}, {'000000000000000000000210100012121221221121': {'depth': 0, 'piece': 1, 'value': -1997209, 'childs': []}}, {'000000000000000000000210101012120221221121': {'depth': 0, 'piece': 1, 'value': -1997209, 'childs': []}}, {'000000000000000000000210100112120221221121': {'depth': 0, 'piece': 1, 'value': -1997209, 'childs': []}}]}}, {'000000000000000200000010100012120221221121': {'depth': 1, 'piece': 2, 'value': -1998309, 'childs': [{'000000000000000200000110100012120221221121': {'depth': 0, 'piece': 1, 'value': -1998308, 'childs': []}}, {'000000001000000200000010100012120221221121': {'depth': 0, 'piece': 1, 'value': -1998308, 'childs': []}}, {'000000000000000200000011100012120221221121': {'depth': 0, 'piece': 1, 'value': -1998309, 'childs': []}}, {'000000000000000201000010100012120221221121': {'depth': 0, 'piece': 1, 'value': -1998309, 'childs': []}}, {'000000000000000200000010100012121221221121': {'depth': 0, 'piece': 1, 'value': -1998309, 'childs': []}}, {'000000000000000200000010101012120221221121': {'depth': 0, 'piece': 1, 'value': -1998309, 'childs': []}}, {'000000000000000200000010100112120221221121': {'depth': 0, 'piece': 1, 'value': -1998309, 'childs': []}}]}}, {'000000000000000000000012100012120221221121': {'depth': 1, 'piece': 2, 'value': -1998108, 'childs': [{'000000000000000000000112100012120221221121': {'depth': 0, 'piece': 1, 'value': -1998108, 'childs': []}}, {'000000000000000100000012100012120221221121': {'depth': 0, 'piece': 1, 'value': -1998108, 'childs': []}}, {'000000000000000010000012100012120221221121': {'depth': 0, 'piece': 1, 'value': -1998108, 'childs': []}}, {'000000000000000001000012100012120221221121': {'depth': 0, 'piece': 1, 'value': -1998108, 'childs': []}}, {'000000000000000000000012100012121221221121': {'depth': 0, 'piece': 1, 'value': -1998108, 'childs': []}}, {'000000000000000000000012101012120221221121': {'depth': 0, 'piece': 1, 'value': -1998108, 'childs': []}}, {'000000000000000000000012100112120221221121': {'depth': 0, 'piece': 1, 'value': -1998108, 'childs': []}}]}}, {'000000000000000002000010100012120221221121': {'depth': 1, 'piece': 2, 'value': -1998309, 'childs': [{'000000000000000002000110100012120221221121': {'depth': 0, 'piece': 1, 'value': -1998308, 'childs': []}}, {'000000000000000102000010100012120221221121': {'depth': 0, 'piece': 1, 'value': -1998308, 'childs': []}}, {'000000000000000002000011100012120221221121': {'depth': 0, 'piece': 1, 'value': -1998309, 'childs': []}}, {'000000000010000002000010100012120221221121': {'depth': 0, 'piece': 1, 'value': -1998309, 'childs': []}}, {'000000000000000002000010100012121221221121': {'depth': 0, 'piece': 1, 'value': -1998309, 'childs': []}}, {'000000000000000002000010101012120221221121': {'depth': 0, 'piece': 1, 'value': -1998309, 'childs': []}}, {'000000000000000002000010100112120221221121': {'depth': 0, 'piece': 1, 'value': -1998309, 'childs': []}}]}}, {'000000000000000000000010100012122221221121': {'depth': 1, 'piece': 2, 'value': 9999009994, 'childs': []}}, {'000000000000000000000010102012120221221121': {'depth': 1, 'piece': 2, 'value': -1996109, 'childs': [{'000000000000000000000110102012120221221121': {'depth': 0, 'piece': 1, 'value': -1996108, 'childs': []}}, {'000000000000000100000010102012120221221121': {'depth': 0, 'piece': 1, 'value': -1996108, 'childs': []}}, {'000000000000000000000011102012120221221121': {'depth': 0, 'piece': 1, 'value': -1996109, 'childs': []}}, {'000000000000000001000010102012120221221121': {'depth': 0, 'piece': 1, 'value': -1996109, 'childs': []}}, {'000000000000000000000010102012121221221121': {'depth': 0, 'piece': 1, 'value': -1996109, 'childs': []}}, {'000000000000000000010010102012120221221121': {'depth': 0, 'piece': 1, 'value': -1996109, 'childs': []}}, {'000000000000000000000010102112120221221121': {'depth': 0, 'piece': 1, 'value': -1996109, 'childs': []}}]}}, {'000000000000000000000010100212120221221121': {'depth': 1, 'piece': 2, 'value': -1998109, 'childs': [{'000000000000000000000110100212120221221121': {'depth': 0, 'piece': 1, 'value': -1998108, 'childs': []}}, {'000000000000000100000010100212120221221121': {'depth': 0, 'piece': 1, 'value': -1998108, 'childs': []}}, {'000000000000000000000011100212120221221121': {'depth': 0, 'piece': 1, 'value': -1998109, 'childs': []}}, {'000000000000000001000010100212120221221121': {'depth': 0, 'piece': 1, 'value': -1998109, 'childs': []}}, {'000000000000000000000010100212121221221121': {'depth': 0, 'piece': 1, 'value': -1998109, 'childs': []}}, {'000000000000000000000010101212120221221121': {'depth': 0, 'piece': 1, 'value': -1998109, 'childs': []}}, {'000000000000000000001010100212120221221121': {'depth': 0, 'piece': 1, 'value': -1998109, 'childs': []}}]}}]}}
 def convert_state_to_tree(tree):
     state=list(tree.keys())[0]
     root=TreeNode(engine.convert_from_string_to_grid(state),tree[state]['value'])
@@ -113,18 +110,19 @@ class ConnectFour:
         # pygame.display.update()
                 
     def visualize_solve_tree(self):
-
-
         self.screen.fill(WHITE)
         pygame.display.flip()
-       
         root=convert_state_to_tree(self.tree) 
         root_x=400
         root_y=100
+
         backIconAccent = pygame.image.load('back-icon.png').convert_alpha()
         backIcon = pygame.image.load('back-icon-accent.png').convert_alpha()
         backIcon = pygame.transform.scale(backIcon, (50, 50))
         backIconAccent = pygame.transform.scale(backIconAccent, (50, 50))
+        font = pygame.font.SysFont("monospace", 30, True)
+        node_expanded_text=font.render(f"Nodes expanded {self.node_expanded}",True,BLACK)
+        self.screen.blit(node_expanded_text,(20,100))
         backIconRect = backIcon.get_rect()
         backIconRect.x = 0
         backIconRect.y = 0
@@ -135,7 +133,6 @@ class ConnectFour:
         backIconRect.center = backIconRect.center
         self.screen.blit(backIcon, backIconRect)
         self.screen.blit(backIconAccent, backIconRectAccent)
-
         undo_level_botton=pygame.image.load('undo.png').convert_alpha()
         undo_level_botton = pygame.transform.scale(undo_level_botton, (50, 50))
         undo_level_botton_rect=undo_level_botton.get_rect()
@@ -177,8 +174,8 @@ class ConnectFour:
                                     if len(child.children)>1:
                                         his.append(root1)
                                         root1=child
-                                        for i in child.children:
-                                            print (i.value)
+                                        # for i in child.children:
+                                        #     print (i.value)
                                     break
                                 child_index+=1
             
@@ -231,53 +228,39 @@ class ConnectFour:
                         (int(col + MINISQUARESIZE / 2), int(row + MINISQUARESIZE / 2)), MINI_PIECE_RADIUS)
         pygame.display.update()
                 
-               
 
-
-
-
-
-
-
-
-
-
-
-
-
-    def winning_move(self, piece):
+    def check_is_winning_move(self,piece,col,row):
         # Check horizontal
         for c in range(COLUMN_COUNT - 3):
             for r in range(ROW_COUNT):
-                if self.board[r][c] == piece and self.board[r][c + 1] == piece and self.board[r][c + 2] == piece and self.board[r][c + 3] == piece:
+                if self.board[r][c] == piece and self.board[r][c + 1] == piece and self.board[r][c + 2] == piece and self.board[r][c + 3] == piece and c==col and r==row:
                     return True
 
         # Check vertical
         for c in range(COLUMN_COUNT):
             for r in range(ROW_COUNT - 3):
-                if self.board[r][c] == piece and self.board[r + 1][c] == piece and self.board[r + 2][c] == piece and self.board[r + 3][c] == piece:
+                if self.board[r][c] == piece and self.board[r + 1][c] == piece and self.board[r + 2][c] == piece and self.board[r + 3][c] == piece and c==col and r==row:
                     return True
 
         # Check positive slope diagonal
         for c in range(COLUMN_COUNT - 3):
             for r in range(ROW_COUNT - 3):
-                if self.board[r][c] == piece and self.board[r + 1][c + 1] == piece and self.board[r + 2][c + 2] == piece and self.board[r + 3][c + 3] == piece:
+                if self.board[r][c] == piece and self.board[r + 1][c + 1] == piece and self.board[r + 2][c + 2] == piece and self.board[r + 3][c + 3] == piece and c==col and r==row :
                     return True
 
         # Check negative slope diagonal
         for c in range(COLUMN_COUNT - 3):
             for r in range(3, ROW_COUNT):
-                if self.board[r][c] == piece and self.board[r - 1][c + 1] == piece and self.board[r - 2][c + 2] == piece and self.board[r - 3][c + 3] == piece:
+                if self.board[r][c] == piece and self.board[r - 1][c + 1] == piece and self.board[r - 2][c + 2] == piece and self.board[r - 3][c + 3] == piece and c==col and r==row:
                     return True
-
         return False
     
     def ai_move(self):
         if self.selected_ai_engine == 'Minimax':
-            choise,self.tree=engine.agent(self.board,self.difficulty,1)
+            choise,self.tree,self.node_expanded=engine.agent(self.board,self.difficulty,1)
             return choise
         else:
-            choise,self.tree=engine.agent(self.board,self.difficulty,2)
+            choise,self.tree,self.node_expanded=engine.agent(self.board,self.difficulty,2)
             return choise
     def ai_menu(self):
         ai_menu = True
@@ -349,49 +332,27 @@ class ConnectFour:
     
     def display_menu(self):
         font = pygame.font.SysFont("monospace", 30, True)
-    
         title = "Welcome To Our Connect 4 Game"
         title_text = font.render(title, True, BLACK)
-        
-        # Create two additional versions of the title text with slight offsets for a 3D effect
         title_text_3d_left = font.render(title, True, BLACK)
         title_text_3d_right = font.render(title, True, BLACK)
-        
-        # Adjust the position of the 3D versions
         title_text_3d_left_pos = (240 - 1, 225 + 1)
-  
-
         menu_rect = pygame.Surface((600, 400), pygame.SRCALPHA)
         pygame.draw.rect(menu_rect, (255, 255, 255, 128), (0, 0, 550, 300), border_radius=10)
-        # pygame.draw.rect(menu_rect, BLACK, (0, 0, 400, 150), 5)
         self.screen.blit(menu_rect, (230, 210))
-
-
         player_vs_player_text = font.render("Player vs. Player", True, BLACK)
         player_vs_ai_text = font.render("Player vs. AI", True, BLACK)
         quit_text = font.render("Quit", True, BLACK)
-        
-        # Render 3D versions of the menu options
         player_vs_player_text_3d_left = font.render("Player vs. Player", True, BLACK)
-        
         player_vs_ai_text_3d_left = font.render("Player vs. AI", True, BLACK)
-        
         quit_text_3d_left = font.render("Quit", True, BLACK)
-        
-        # Adjust the positions of the 3D versions for each menu option
         player_vs_player_text_3d_left_pos = (350 - 1, 300 + 1)
-        
         player_vs_ai_text_3d_left_pos = (390 - 1, 350 + 1)
-        
         quit_text_3d_left_pos = (460 - 1, 400 + 1)
         self.screen.blit(title_text_3d_left, title_text_3d_left_pos)
-    
         self.screen.blit(player_vs_player_text_3d_left, player_vs_player_text_3d_left_pos)
-        
         self.screen.blit(player_vs_ai_text_3d_left, player_vs_ai_text_3d_left_pos)
-        
         self.screen.blit(quit_text_3d_left, quit_text_3d_left_pos)
-        
         self.screen.blit(player_vs_player_text, (350, 300))
         self.screen.blit(player_vs_ai_text, (390, 350))
         self.screen.blit(title_text, (240, 225))
@@ -403,6 +364,7 @@ class ConnectFour:
     def main_menu(self):
         self.player1_value=0
         self.ai_value=0
+        self.node_expanded=0
         while self.menu:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -447,7 +409,6 @@ class ConnectFour:
             if player=='AI':
                 pygame.display.set_caption('Computer Wins')
                 win_text = font.render(f"Computer wins!", True, GREEN if player == 1 else GREEN)
-
             else:
                 pygame.display.set_caption('You Win')
                 win_text = font.render(f"You win!", True, GREEN if player == 1 else GREEN)
@@ -483,6 +444,7 @@ class ConnectFour:
                 turn_text = font.render("AI's turn", True, YELLOW)
         player1Score=font.render(f"Your Score : {self.player1_value}",True, RED)
         aiScore=font.render(f"AI Score : {self.ai_value}", True, YELLOW)
+
         self.screen.blit(player1Score, ((COLUMN_COUNT)*SQUARE_SIZE+10, 0 * SQUARE_SIZE+30))
         self.screen.blit(aiScore, ((COLUMN_COUNT)*SQUARE_SIZE+10, 1 * SQUARE_SIZE+30))
         self.screen.blit(turn_text, ((COLUMN_COUNT)*SQUARE_SIZE+10, 2 * SQUARE_SIZE))
@@ -516,8 +478,7 @@ class ConnectFour:
                             self.drop_piece(row, col, turn + 1)
                             self.screen.fill(WHITE)
                             self.draw_board(turn + 1)
-                            if self.winning_move(turn + 1):
-                                # self.show_winner_popup(turn+1)
+                            if self.check_is_winning_move(turn + 1,col,row):
                                 if turn == 0:
                                     self.player1_value+=1
                                 else:
@@ -542,7 +503,7 @@ class ConnectFour:
                                 self.drop_piece(row, col, turn + 1)
                                 self.screen.fill(WHITE)
                                 self.draw_board(turn + 1)
-                                if self.winning_move(turn + 1):
+                                if self.check_is_winning_move(turn + 1,col,row):
                                     self.player1_value+=1
                                 if self.tie_move():
                                     if self.player1_value>self.ai_value:
@@ -556,12 +517,11 @@ class ConnectFour:
                 elif not self.player_vs_player and turn == 1:
                     if not self.menu:
                         ai_col = self.ai_move()
-
                         ai_row = self.get_next_open_row(ai_col)
                         self.drop_piece(ai_row, ai_col, 2)
                         self.screen.fill(WHITE)
                         self.draw_board(turn)
-                        if self.winning_move(2):
+                        if self.check_is_winning_move(2,ai_col,ai_row):
                             self.ai_value+=1
                         if self.tie_move():
                                 if self.player1_value>self.ai_value:
