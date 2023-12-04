@@ -116,8 +116,8 @@ class ConnectFour:
         root_x=400
         root_y=100
 
-        backIconAccent = pygame.image.load('back-icon.png').convert_alpha()
-        backIcon = pygame.image.load('back-icon-accent.png').convert_alpha()
+        backIconAccent = pygame.image.load('images/back-icon.png').convert_alpha()
+        backIcon = pygame.image.load('images/back-icon-accent.png').convert_alpha()
         backIcon = pygame.transform.scale(backIcon, (50, 50))
         backIconAccent = pygame.transform.scale(backIconAccent, (50, 50))
         font = pygame.font.SysFont("monospace", 30, True)
@@ -133,7 +133,7 @@ class ConnectFour:
         backIconRect.center = backIconRect.center
         self.screen.blit(backIcon, backIconRect)
         self.screen.blit(backIconAccent, backIconRectAccent)
-        undo_level_botton=pygame.image.load('undo.png').convert_alpha()
+        undo_level_botton=pygame.image.load('images/undo.png').convert_alpha()
         undo_level_botton = pygame.transform.scale(undo_level_botton, (50, 50))
         undo_level_botton_rect=undo_level_botton.get_rect()
         undo_level_botton_rect.x = (COLUMN_COUNT+3) * SQUARE_SIZE-50
