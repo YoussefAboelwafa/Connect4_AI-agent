@@ -1,6 +1,7 @@
 import math
 import random
 import time
+import numpy as np
 
 ROW_COUNT = 6
 COLUMN_COUNT = 7
@@ -22,21 +23,21 @@ def convert_from_grid_to_string(grid):
             state += str(grid[i][j])
     return state
 def drop_piece(state, col, piece):
-    grid = convert_from_string_to_grid(state)
     for row in range(5, -1, -1):
-        if grid[row][col] == 0:
-            grid[row][col] = piece
+        if state[row*7 + col] == '0':
+            newstate = state[:row*7+col] + str(piece)[0] + state[row*7+col + 1:]
             break
-    return convert_from_grid_to_string(grid)
+    return newstate
+def is_valid_location(state, col):
+    return state[col] == '0'
+
+
 def get_valid_locations(state):
     locations = []
     for col in range(7):
         if is_valid_location(state, col):
             locations.append(col)
     return locations
-def is_valid_location(state, col):
-    grid = convert_from_string_to_grid(state)
-    return grid[0][col] == 0
 def get_score(state, col, piece, depth, option):
     next_state = drop_piece(state, col, piece)
     if option == 1:
@@ -63,37 +64,52 @@ def get_score(state, col, piece, depth, option):
         new_dict[next_state]['value'] = value
         min_tree[state]["childs"].append(new_dict)
         return value
+    
+def count_potential_future_wins(board, player):
+    potential_wins = 0
+    for col in range(COLUMN_COUNT):
+        if is_valid_location(convert_from_grid_to_string(board), col):
+            future_state = drop_piece(
+                convert_from_grid_to_string(board), col, player)
+            if is_terminal(future_state):
+                potential_wins += 1
+    return potential_wins
 # heuristic function
 def minimax_heuristic(state, player):
     # return 100
     board = convert_from_string_to_grid(state)
-
     num_of_four = count_window(board, 4, player)
     num_of_three = count_window(board, 3, player)
     num_of_two = count_window(board, 2, player)
 
     num_of_four_opp = count_window(board, 4, player % 2 + 1)
-    num_of_three_opp = count_window(board, 3, player % 2 + 1)
-    num_of_two_opp = count_window(board, 2, player % 2 + 1)
+    # num_of_three_opp = count_window(board, 3, player % 2 + 1)
+    # num_of_two_opp = count_window(board, 2, player % 2 + 1)
 
     # num_of_fail_loase=fail_loses(board,4,player%2+1)
-
+    
+    
     if (
-            num_of_four == 0
-            and num_of_three == 0
-            and num_of_two == 0
-            and num_of_four_opp == 0
-            and num_of_three_opp == 0
+        num_of_four == 0
+        and num_of_three == 0
+        and num_of_two == 0
+        and num_of_four_opp == 0
+        # and num_of_three_opp == 0
     ):
         return 0
     return (
-            (10**10) * num_of_four
-            + (10**6) * num_of_three
-            + 100 * num_of_two
-            - 1 * num_of_two_opp
-            - (10**4) * num_of_three_opp
-            - (10**8) * num_of_four_opp
+        (10**10) * num_of_four
+        # + 1000 * num_of_three
+        # + 100 * num_of_two
+        # - 1 * num_of_two_opp
+        # - (10**6) * num_of_three_opp
+        - (10**8) * num_of_four_opp
+        # + 1000 * count_potential_future_wins(board, player)
+        # -10000 * count_potential_future_wins(board, player % 2+1)
     )
+
+
+
 def count_window(board, window, player):
     number_of_windows = 0
     # Hirozontal windows
@@ -120,16 +136,108 @@ def count_window(board, window, player):
             if arr.count(player) == window and arr.count(player%2+1)==0:
                 number_of_windows += 1
     return number_of_windows
+
+
+def evaluate_window(window, piece):
+    opponent_piece = '1' if piece == '2' else '2'
+    score = 0
+    if window.count('2') == 4:
+        score += 1000
+    elif window.count('2') == 3 and window.count('0') == 1:
+        score += 100
+    if window.count('2') == 2 and window.count('0') == 2:
+        score += 2
+    
+    if window.count('1') == 4:
+        score -= 100000
+    elif window.count('1') == 3 and window.count('0') == 1:
+        score -= 500
+    elif window.count('1') == 2 and window.count('0') == 2:
+        score -= 1
+    return score
+def score_position(state, piece):
+    rows = ROW_COUNT
+    cols = COLUMN_COUNT
+    score = 0
+    center_array = [state[r * cols + cols // 2] for r in range(rows)]
+    center_count = center_array.count(piece)
+    score += center_count * 6
+
+    # Score horizontal
+    for r in range(rows):
+        for c in range(cols - 3):
+            start = r * cols + c
+            window = state[start:start + 4]
+            score += evaluate_window(window, piece)
+
+    # Score vertical
+    for c in range(cols):
+        for r in range(rows - 3):
+            start = r * cols + c
+            window = state[start:start + 4 * cols:cols]
+            score += evaluate_window(window, piece)
+
+    # Score positively sloped diagonals
+    for r in range(3, rows):
+        for c in range(cols - 3):
+            start = r * cols + c
+            window = [state[start - i * (cols - 1)] for i in range(4)]
+            score += evaluate_window(window, piece)
+
+    # Score negatively sloped diagonals
+    for r in range(3, rows):
+        for c in range(3, cols):
+            start = r * cols + c
+            window = [state[start - i * (cols + 1)] for i in range(4)]
+            score += evaluate_window(window, piece)
+
+    return score
+
+
+
+def winning_move(board, piece):
+    # Check horizontal locations for win
+    for c in range(COLUMN_COUNT - 3):
+        for r in range(ROW_COUNT):
+            if board[r][c] == piece and board[r][c + 1] == piece and board[r][c + 2] == piece and board[r][c + 3] == piece:
+                return True
+
+    # Check vertical locations for win
+    for c in range(COLUMN_COUNT):
+        for r in range(ROW_COUNT - 3):
+            if board[r][c] == piece and board[r + 1][c] == piece and board[r + 2][c] == piece and board[r + 3][c] == piece:
+                return True
+
+    # Check positively sloped diagonals
+    for c in range(COLUMN_COUNT - 3):
+        for r in range(ROW_COUNT - 3):
+            if board[r][c] == piece and board[r + 1][c + 1] == piece and board[r + 2][c + 2] == piece and board[r + 3][c + 3] == piece:
+                return True
+
+    # Check negatively sloped diagonals
+    for c in range(COLUMN_COUNT - 3):
+        for r in range(3, ROW_COUNT):
+            if board[r][c] == piece and board[r - 1][c + 1] == piece and board[r - 2][c + 2] == piece and board[r - 3][c + 3] == piece:
+                return True
+
+    return False
+
+
+def is_terminal_node(board):
+    return winning_move(convert_from_string_to_grid(board), 1) or winning_move(convert_from_string_to_grid(board), 2) or is_terminal(state=board)
+
 def is_terminal(state):
     # Check for draw
     if '0' not in state:
         return True
     return False
+
 def minimax(state, depth, piece, maximizingPlayer, tree):
     global NODE_EXPANDED
     NODE_EXPANDED+=1
-    if depth == 0 or is_terminal(state):
-        value = minimax_heuristic(state, piece)
+    
+    if depth == 0 or is_terminal(state) :
+        value = score_position(state, piece)
         return value
     valid_location = get_valid_locations(state)
     if maximizingPlayer:
@@ -141,7 +249,7 @@ def minimax(state, depth, piece, maximizingPlayer, tree):
                     "depth": depth - 1,
                     "piece": piece % 2 + 1,
                     "value": 0,
-                    "childs": [], }
+                    "childs": [],}
             }
             value = max(value, minimax(
                 child, depth - 1, piece % 2 + 1, False, new_dict))
@@ -165,11 +273,15 @@ def minimax(state, depth, piece, maximizingPlayer, tree):
             new_dict[child]["value"] = value
             tree[state]["childs"].append(new_dict)
         return value
+    
+    
+    
+    
 def minimax_alpha_beta(state, depth, alpha, beta, piece, maximizingPlayer,tree):
     global NODE_EXPANDED
     NODE_EXPANDED+=1
     if depth == 0 or is_terminal(state):
-        return minimax_heuristic(state, piece)
+        return score_position(state, piece)
     valid_location = get_valid_locations(state)
     if maximizingPlayer:
         value = -math.inf
@@ -187,11 +299,11 @@ def minimax_alpha_beta(state, depth, alpha, beta, piece, maximizingPlayer,tree):
                 value, minimax_alpha_beta(
                     child, depth - 1, alpha, beta, piece % 2 + 1, False,new_dict)
             )
-            new_dict[child]["value"] = value
-            tree[state]["childs"].append(new_dict)
             alpha = max(alpha, value)
             if beta <= alpha:
                 break
+            new_dict[child]["value"] = value
+            tree[state]["childs"].append(new_dict)
         return value
     else:
         value = math.inf
@@ -209,11 +321,11 @@ def minimax_alpha_beta(state, depth, alpha, beta, piece, maximizingPlayer,tree):
                 value, minimax_alpha_beta(
                     child, depth - 1, alpha, beta, piece % 2 + 1, True,new_dict)
             )
-            new_dict[child]["value"] = value
-            tree[state]["childs"].append(new_dict)
             beta = min(beta, value)
             if beta <= alpha:
                 break
+            new_dict[child]["value"] = value
+            tree[state]["childs"].append(new_dict)
         return value
 def agent(grid, depth, option):
     global NODE_EXPANDED
@@ -230,18 +342,19 @@ def agent(grid, depth, option):
     scores = dict(
         zip(
             valid_moves,
-            [get_score(state, col, 1, depth, option) for col in valid_moves],
+            [get_score(state, col, 2, depth, option) for col in valid_moves],
         )
     )
-
-    print("Scores are", scores)
     max_cols = [key for key in scores.keys() if scores[key] ==
                 max(scores.values())]
 
-    print("max cols are", max_cols)
+    # print("max cols are", max_cols)
     res = random.choice(max_cols)
     min_tree[state]["value"] = scores[res]
     return res, min_tree ,NODE_EXPANDED
+
+
+
 def print_tree(tree, indent=0):
     state = list(tree.keys())[0]
     print("    " * indent + f"{state} | Depth: {tree[state]['depth']}, Piece: {tree[state]['piece']}, Value: {tree[state]['value']}")
@@ -261,7 +374,7 @@ board = [
 
 def main():
     start = time.time()
-    Res=agent(board, 8, 2)
+    Res=agent(board, 9, 2)
     print(Res[0] , Res[2])
     end = time.time()
     print(end - start)

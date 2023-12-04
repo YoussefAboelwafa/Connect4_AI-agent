@@ -139,7 +139,7 @@ class ConnectFour:
         undo_level_botton_rect.x = (COLUMN_COUNT+3) * SQUARE_SIZE-50
         undo_level_botton_rect.y = 50
         undo_level_botton_rect.center=((COLUMN_COUNT+3) * SQUARE_SIZE-50,50)
-        self.screen.blit(undo_level_botton, undo_level_botton_rect)
+        # self.screen.blit(undo_level_botton, undo_level_botton_rect)
         first_child_x=root_x-385
         first_child_y=root_y+300
         child_offset=140
@@ -160,8 +160,8 @@ class ConnectFour:
                                 self.screen.blit(backIcon, backIconRect)
                                 self.screen.blit(backIconAccent, backIconRectAccent) 
                                 self.screen.blit(undo_level_botton, undo_level_botton_rect)
+                                self.screen.blit(node_expanded_text,(20,100))
                                 root1=his[-1]
-                                
                                 his.pop()
                         else:
                             child_index=0
@@ -229,31 +229,35 @@ class ConnectFour:
         pygame.display.update()
                 
 
-    def check_is_winning_move(self,piece,col,row):
+    def check_is_winning_move(self, piece, col, row):
+        count = 0
+
+        def check_direction(dc, dr):
+            nonlocal count
+            for c in range(COLUMN_COUNT - 3):
+                for r in range(ROW_COUNT - 3) if dr != -1 else range(3, ROW_COUNT):
+                    if all(self.board[r + i * dr][c + i * dc] == piece for i in range(4)):
+                        count += 1 if any(c + i * dc == col and r + i * dr == row for i in range(4)) else 0
+
         # Check horizontal
         for c in range(COLUMN_COUNT - 3):
             for r in range(ROW_COUNT):
-                if self.board[r][c] == piece and self.board[r][c + 1] == piece and self.board[r][c + 2] == piece and self.board[r][c + 3] == piece and c==col and r==row:
-                    return True
+                if all(self.board[r][c + i] == piece for i in range(4)):
+                    count += 1 if any(c + i == col and r == row for i in range(4)) else 0
 
         # Check vertical
         for c in range(COLUMN_COUNT):
             for r in range(ROW_COUNT - 3):
-                if self.board[r][c] == piece and self.board[r + 1][c] == piece and self.board[r + 2][c] == piece and self.board[r + 3][c] == piece and c==col and r==row:
-                    return True
+                if all(self.board[r + i][c] == piece for i in range(4)):
+                    count += 1 if any(c == col and r + i == row for i in range(4)) else 0
 
         # Check positive slope diagonal
-        for c in range(COLUMN_COUNT - 3):
-            for r in range(ROW_COUNT - 3):
-                if self.board[r][c] == piece and self.board[r + 1][c + 1] == piece and self.board[r + 2][c + 2] == piece and self.board[r + 3][c + 3] == piece and c==col and r==row :
-                    return True
+        check_direction(1, 1)
 
         # Check negative slope diagonal
-        for c in range(COLUMN_COUNT - 3):
-            for r in range(3, ROW_COUNT):
-                if self.board[r][c] == piece and self.board[r - 1][c + 1] == piece and self.board[r - 2][c + 2] == piece and self.board[r - 3][c + 3] == piece and c==col and r==row:
-                    return True
-        return False
+        check_direction(1, -1)
+
+        return count
     
     def ai_move(self):
         if self.selected_ai_engine == 'Minimax':
@@ -478,11 +482,12 @@ class ConnectFour:
                             self.drop_piece(row, col, turn + 1)
                             self.screen.fill(WHITE)
                             self.draw_board(turn + 1)
-                            if self.check_is_winning_move(turn + 1,col,row):
+                            winning_move=self.check_is_winning_move(turn + 1,col,row)
+                            if winning_move:
                                 if turn == 0:
-                                    self.player1_value+=1
+                                    self.player1_value+=winning_move
                                 else:
-                                    self.ai_value+=1
+                                    self.ai_value+=winning_move
 
                             if self.tie_move():
                                 if self.player1_value>self.ai_value:
@@ -503,8 +508,9 @@ class ConnectFour:
                                 self.drop_piece(row, col, turn + 1)
                                 self.screen.fill(WHITE)
                                 self.draw_board(turn + 1)
-                                if self.check_is_winning_move(turn + 1,col,row):
-                                    self.player1_value+=1
+                                winning_move=self.check_is_winning_move(turn + 1,col,row)
+                                if winning_move:
+                                    self.player1_value+=winning_move
                                 if self.tie_move():
                                     if self.player1_value>self.ai_value:
                                         self.show_winner_popup(1)
@@ -521,8 +527,9 @@ class ConnectFour:
                         self.drop_piece(ai_row, ai_col, 2)
                         self.screen.fill(WHITE)
                         self.draw_board(turn)
-                        if self.check_is_winning_move(2,ai_col,ai_row):
-                            self.ai_value+=1
+                        winning_move = self.check_is_winning_move(2,ai_col,ai_row)
+                        if winning_move:
+                            self.ai_value+=winning_move
                         if self.tie_move():
                                 if self.player1_value>self.ai_value:
                                     self.show_winner_popup(1)

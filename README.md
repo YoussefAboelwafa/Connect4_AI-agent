@@ -151,4 +151,10 @@ def minimax_alpha_beta(board, depth, alpha, beta, maximizingPlayer):
     <td>1111</td>
     <td>2.8</td>
   </tr>
+  <tr>
+    <td>5</td>
+    <td>1111</td>
+    <td>2.8</td>
+  </tr>
+  
 </table>
