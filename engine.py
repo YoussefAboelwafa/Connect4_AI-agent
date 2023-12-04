@@ -1,7 +1,6 @@
 import math
 import random
 import time
-import numpy as np
 
 ROW_COUNT = 6
 COLUMN_COUNT = 7
@@ -30,8 +29,6 @@ def drop_piece(state, col, piece):
     return newstate
 def is_valid_location(state, col):
     return state[col] == '0'
-
-
 def get_valid_locations(state):
     locations = []
     for col in range(7):
@@ -64,17 +61,6 @@ def get_score(state, col, piece, depth, option):
         new_dict[next_state]['value'] = value
         min_tree[state]["childs"].append(new_dict)
         return value
-    
-def count_potential_future_wins(board, player):
-    potential_wins = 0
-    for col in range(COLUMN_COUNT):
-        if is_valid_location(convert_from_grid_to_string(board), col):
-            future_state = drop_piece(
-                convert_from_grid_to_string(board), col, player)
-            if is_terminal(future_state):
-                potential_wins += 1
-    return potential_wins
-# heuristic function
 def minimax_heuristic(state, player):
     # return 100
     board = convert_from_string_to_grid(state)
@@ -107,9 +93,6 @@ def minimax_heuristic(state, player):
         # + 1000 * count_potential_future_wins(board, player)
         # -10000 * count_potential_future_wins(board, player % 2+1)
     )
-
-
-
 def count_window(board, window, player):
     number_of_windows = 0
     # Hirozontal windows
@@ -136,20 +119,18 @@ def count_window(board, window, player):
             if arr.count(player) == window and arr.count(player%2+1)==0:
                 number_of_windows += 1
     return number_of_windows
-
-
 def evaluate_window(window, piece):
     opponent_piece = '1' if piece == '2' else '2'
     score = 0
     if window.count('2') == 4:
-        score += 1000
+        score += 100000
     elif window.count('2') == 3 and window.count('0') == 1:
         score += 100
     if window.count('2') == 2 and window.count('0') == 2:
         score += 2
     
     if window.count('1') == 4:
-        score -= 100000
+        score -= 10000
     elif window.count('1') == 3 and window.count('0') == 1:
         score -= 500
     elif window.count('1') == 2 and window.count('0') == 2:
@@ -192,46 +173,11 @@ def score_position(state, piece):
             score += evaluate_window(window, piece)
 
     return score
-
-
-
-def winning_move(board, piece):
-    # Check horizontal locations for win
-    for c in range(COLUMN_COUNT - 3):
-        for r in range(ROW_COUNT):
-            if board[r][c] == piece and board[r][c + 1] == piece and board[r][c + 2] == piece and board[r][c + 3] == piece:
-                return True
-
-    # Check vertical locations for win
-    for c in range(COLUMN_COUNT):
-        for r in range(ROW_COUNT - 3):
-            if board[r][c] == piece and board[r + 1][c] == piece and board[r + 2][c] == piece and board[r + 3][c] == piece:
-                return True
-
-    # Check positively sloped diagonals
-    for c in range(COLUMN_COUNT - 3):
-        for r in range(ROW_COUNT - 3):
-            if board[r][c] == piece and board[r + 1][c + 1] == piece and board[r + 2][c + 2] == piece and board[r + 3][c + 3] == piece:
-                return True
-
-    # Check negatively sloped diagonals
-    for c in range(COLUMN_COUNT - 3):
-        for r in range(3, ROW_COUNT):
-            if board[r][c] == piece and board[r - 1][c + 1] == piece and board[r - 2][c + 2] == piece and board[r - 3][c + 3] == piece:
-                return True
-
-    return False
-
-
-def is_terminal_node(board):
-    return winning_move(convert_from_string_to_grid(board), 1) or winning_move(convert_from_string_to_grid(board), 2) or is_terminal(state=board)
-
 def is_terminal(state):
     # Check for draw
     if '0' not in state:
         return True
     return False
-
 def minimax(state, depth, piece, maximizingPlayer, tree):
     global NODE_EXPANDED
     NODE_EXPANDED+=1
@@ -273,10 +219,6 @@ def minimax(state, depth, piece, maximizingPlayer, tree):
             new_dict[child]["value"] = value
             tree[state]["childs"].append(new_dict)
         return value
-    
-    
-    
-    
 def minimax_alpha_beta(state, depth, alpha, beta, piece, maximizingPlayer,tree):
     global NODE_EXPANDED
     NODE_EXPANDED+=1
@@ -352,8 +294,6 @@ def agent(grid, depth, option):
     res = random.choice(max_cols)
     min_tree[state]["value"] = scores[res]
     return res, min_tree ,NODE_EXPANDED
-
-
 
 def print_tree(tree, indent=0):
     state = list(tree.keys())[0]

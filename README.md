@@ -116,6 +116,12 @@ def minimax_alpha_beta(board, depth, alpha, beta, maximizingPlayer):
     <td>19608</td>
     <td>6.63</td>
   </tr>
+  <tr>
+    <td>6</td>
+    <td>135885</td>
+    <td>9.88</td>
+  </tr>
+
 </table>
 
 ### With Pruning:
@@ -152,9 +158,18 @@ def minimax_alpha_beta(board, depth, alpha, beta, maximizingPlayer):
     <td>2.8</td>
   </tr>
   <tr>
-    <td>5</td>
-    <td>1111</td>
-    <td>2.8</td>
+    <td>6</td>
+    <td>25506</td>
+    <td>1.6</td>
   </tr>
-  
+  <tr>
+    <td>7</td>
+    <td>142546</td>
+    <td>9.86</td>
+  </tr>  
+  <tr>
+    <td>8</td>
+    <td>508643</td>
+    <td>30.84</td>
+  </tr>
 </table>
