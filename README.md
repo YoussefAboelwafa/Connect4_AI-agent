@@ -70,13 +70,11 @@ def minimax_alpha_beta(board, depth, alpha, beta, maximizingPlayer):
 ![image](https://storage.googleapis.com/kaggle-media/learn/images/FBoWr2f.png)
 
 ```python
- A = 10^10
- B = 1000
- C = 100
+ A = 100,000
+ B = 100
+ C = 2
  D = -1
- E = -10^6
- 
- If Potential Future Win => +1000 
+ E = -500
 ```
 
 ## Analysis for Runtime
