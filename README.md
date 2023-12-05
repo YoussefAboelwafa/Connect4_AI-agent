@@ -158,7 +158,7 @@ def minimax_alpha_beta(board, depth, alpha, beta, maximizingPlayer):
   <tr>
     <td>6</td>
     <td>25506</td>
-    <td>1.6</td>
+    <td>4.2</td>
   </tr>
   <tr>
     <td>7</td>
