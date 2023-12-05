@@ -70,11 +70,11 @@ def minimax_alpha_beta(board, depth, alpha, beta, maximizingPlayer):
 ![image](https://storage.googleapis.com/kaggle-media/learn/images/FBoWr2f.png)
 
 ```python
- A = 100,000
- B = 100
- C = 2
- D = -1
- E = -500
+ A = 100000
+ B = 5000
+ C = 200
+ D = -100
+ E = -4000
 ```
 
 ## Analysis for Runtime
